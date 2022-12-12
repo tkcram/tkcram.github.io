@@ -1,11 +1,73 @@
-< <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-</head>
-<body>
-<h1>Hello Universe</h1>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Color Generator Machine</title>
+    <link href="stylesheet1.css" rel="stylesheet">
+  </head>
+  <body class="my-background">
+    <div class="topnav">
+        <a href="homepage.html">Home</a>
+        <a href="colorandfeelings.html">Color and your feelings</a>
+        <a href="IntroductiontoColorTheory.html">Color Theory</a>
+        <a href="ColorGenerator.html">Color Generator</a>
+        <a href="ColorGuessingGame.html">Guessing Game</a>
+        <a href="resources.html">Resources</a>
+        <a href="about.html">About</a>
+        </div>
+        <div class="row">
+            <div class="column side"></div>
+            <div class="column middle">
+    <h1><span class="highlight">Color Generator Machine</span></h1>
+    <p><span class="highlight">Use this color generator to make a random color!</span></p>
+
+    <div>
+      <button class="my-button">Click Me!</button>
+    </div>
+    <script>
+      async function fetchColor() {
+    var rgbResponse = await fetch("https://colormind.io/api/", {
+      method: "POST",
+      body: JSON.stringify({
+        model: "default"
+      })
+    });
+    var rgbData = await rgbResponse.json();
+    var colors = rgbData.result;
+    var color = colors[0];
+    var rgbValue = `rgb(${color.join(",")})`;
+    var nameResponse = await fetch(`https://www.thecolorapi.com/id?rgb=${rgbValue}`);
+    var nameData = await nameResponse.json();
+    var colorName = nameData.name.value;
+    var background = document.querySelector(".my-background");
+    var h1 = document.querySelector(".color-code");
+    background.style.backgroundColor = rgbValue;
+    h1.textContent = `${colorName} - ${rgbValue}`;
+  };
+  var button = document.querySelector(".my-button");
+  button.addEventListener("click", fetchColor);
+    </script>
+    <p><span class="highlight">What do you think of the color name? Could you come up with a better name for this color?<br>
+    How do you think you could make this color with paint? What colors would you mix together?</span></p>
+    <h2><span class="highlight">RGB Values</span></h2>
+    <p><span class="highlight">The letters "RGB" stand for red, green, and blue. 
+        When people make colors appear on your computer screen, they are mixing red, green, and blue together, just like how you mix paint together to get different colors. We call these "RGB values."<br>
+        Like we learned in color theory, there are a few different types of color wheels. There is a color wheel that is used by artists and one that is used digitally. 
+        The artist's color wheel uses primary colors, which are red, blue, and yellow. 
+        A digital color wheel uses red, green, and blue, because light behaves differently on a computer screen. <br>
+        Computers also see colors differently than humans do. While we see colors as a reflection of light, computers see colors as numbers.
+        The numbers in the RGB values tell the computer how much red, green, and blue to mix.</span></p>
+    <p><span class="highlight">Digital pictures are made up of pixels. You might be familiar with pixels if you've ever played an old video game, or Minecraft, where the pixels are very large.</span></p>
+    <img src="minecraftblock.webp" alt="a block of grass covered dirt from Minecraft" class="center">
+    <p><span class="highlight">In a digital photo, each pixel is just one color. Many pixels together will blend to create a more complex color.<br>
+        The bigger the pixels are, the easier you can see each color separated. But when pixels are very small, all of the colors blend together smoothly, like this:</span></p>
+    <img src="grassypath.jpeg" alt="A dirt path running through a grassy meadow" class="center">
+    <h2><span class="highlight">Suggested Activity</span></h2>
+    <p><span class="highlight">Split into groups of 3 or 4. Have each group member pick a color using this generator. Using only red, green, and blue paint, try to mix your color!<br>
+        Once everyone has their color, create a piece of art using your colors. You could even try making pixel art!</span></p></div>
+        <div class="column side"></div></div>
+<div class="footer">© 2022 page by Gabby Evergreen </div>
+  </body>
 </html>
