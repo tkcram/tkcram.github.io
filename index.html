@@ -28,18 +28,20 @@
     </div>
     <script>
       async function fetchColor() {
-    var rgbResponse = await fetch("https://colormind.io/api/", {
+        console.log('trying')
+    var rgbResponse = await fetch("http://colormind.io/api/", {
       method: "POST",
       body: JSON.stringify({
         model: "default"
       })
     });
+    console.log(rgbResponse);
     var rgbData = await rgbResponse.json();
     var colors = rgbData.result;
     var color = colors[0];
     var rgbValue = `rgb(${color.join(",")})`;
 
-    var nameResponse = await fetch(`https://www.thecolorapi.com/id?rgb=${rgbValue}`);
+    var nameResponse = await fetch(`http://www.thecolorapi.com/id?rgb=${rgbValue}`);
     var nameData = await nameResponse.json();
     var colorName = nameData.name.value;
     var background = document.querySelector(".my-background");
